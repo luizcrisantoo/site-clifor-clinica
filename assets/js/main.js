@@ -70,13 +70,17 @@ function renderDoctorCard(doc) {
     ? '<div class="sub">' + doc.sub + '</div>'
     : '';
 
+  var photoHtml = doc.photo
+    ? '<img src="assets/img/' + doc.photo + '" alt="' + doc.role + ' ' + doc.name + '"'
+      + ' loading="lazy"'
+      + ' onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">'
+      + '<div class="t-avatar" style="display:none">' + initials + '</div>'
+    : '<div class="t-avatar">' + initials + '</div>';
+
   return [
     '<div class="t-card">',
     '  <div class="t-photo">',
-    '    <img src="assets/' + doc.photo + '" alt="' + doc.role + ' ' + doc.name + '"',
-    '         loading="lazy"',
-    '         onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\'">',
-    '    <div class="t-avatar" style="display:none">' + initials + '</div>',
+    '    ' + photoHtml,
     '  </div>',
     '  <div class="t-info">',
     '    <h3>' + doc.name + '</h3>',

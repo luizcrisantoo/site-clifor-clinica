@@ -95,17 +95,17 @@ nav a:hover { color: #fff; background: rgba(255,255,255,.08); }
 .team-group-title::before { content: ''; display: inline-block; width: 4px; height: 18px; background: var(--blue-accent); border-radius: 2px; }
 
 /* Cards de profissionais */
-.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; }
-.t-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: var(--radius); overflow: hidden; transition: transform .2s, box-shadow .2s; }
-.t-card:hover { transform: translateY(-3px); box-shadow: 0 6px 20px rgba(0,0,0,.08); }
-.t-photo { height: 160px; background: linear-gradient(135deg, var(--dark-3), var(--dark)); display: flex; align-items: center; justify-content: center; overflow: hidden; position: relative; }
-.t-photo img { width: 100%; height: 100%; object-fit: cover; object-position: top; display: block; }
-.t-avatar { width: 72px; height: 72px; border-radius: 50%; background: rgba(33,150,243,.25); border: 2px solid rgba(255,255,255,.2); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; font-weight: 700; color: #fff; letter-spacing: 1px; flex-shrink: 0; }
-.t-info { padding: 14px 16px; }
-.t-info h3 { font-size: .9rem; font-weight: 700; color: var(--dark); margin-bottom: 2px; }
-.t-info .role { font-size: .78rem; color: var(--blue); font-weight: 600; margin: 2px 0; }
-.t-info .sub { font-size: .78rem; color: var(--gray-600); font-weight: 500; }
-.t-info .reg { font-size: .72rem; color: var(--gray-400); margin-top: 4px; }
+.team-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 24px; }
+.t-card { background: var(--white); border: 1px solid var(--gray-200); border-radius: 12px; padding: 24px 16px 20px; transition: transform .2s, box-shadow .2s; text-align: center; }
+.t-card:hover { transform: translateY(-4px); box-shadow: 0 8px 24px rgba(0,0,0,.10); }
+.t-photo { width: 110px; height: 110px; margin: 0 auto 14px; border-radius: 50%; overflow: hidden; background: linear-gradient(135deg, #0d2137, #143050); display: flex; align-items: center; justify-content: center; border: 3px solid var(--gray-200); }
+.t-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.t-avatar { width: 100%; height: 100%; border-radius: 50%; background: rgba(33,150,243,.15); display: flex; align-items: center; justify-content: center; font-size: 1.6rem; font-weight: 700; color: #fff; letter-spacing: 1px; }
+.t-info { padding: 0; }
+.t-info h3 { font-size: .88rem; font-weight: 700; color: var(--dark); margin-bottom: 3px; }
+.t-info .role { font-size: .78rem; color: var(--blue); font-weight: 600; margin: 3px 0; }
+.t-info .sub { font-size: .76rem; color: var(--gray-600); font-weight: 500; }
+.t-info .reg { font-size: .72rem; color: var(--gray-400); margin-top: 6px; }
 
 /* === PLANOS / CONVÊNIOS === */
 .plan-list { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
