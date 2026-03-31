@@ -5,14 +5,14 @@
    DEPENDE DE: clinic.js (CLIFOR.clinic deve estar definido)
 
    Uso:
-     CLIFOR.buildWALink('default')   -> link para agendamento padrao
-     CLIFOR.buildWALink('convenios') -> link com contexto de convenios
-     CLIFOR.buildWALink('chatbot')   -> link quando chatbot nao entende
+     CLIFOR.buildWALink('default')   → link para agendamento padrão
+     CLIFOR.buildWALink('convenios') → link com contexto de convênios
+     CLIFOR.buildWALink('chatbot')   → link quando chatbot não entende
    ============================================================ */
 'use strict';
 
 /**
- * Gera o link completo do WhatsApp com mensagem pre-preenchida.
+ * Gera o link completo do WhatsApp com mensagem pré-preenchida.
  * @param {string} messageKey - chave em CLIFOR.clinic.whatsapp.messages
  * @returns {string} URL wa.me completa
  */

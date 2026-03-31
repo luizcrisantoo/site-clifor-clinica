@@ -2,22 +2,22 @@
    CLIFOR Olinda — js/data/doctors.js
    Lista completa de profissionais + categorias de abas.
 
-   Para adicionar/remover um medico, basta incluir ou excluir
+   Para adicionar/remover um médico, basta incluir ou excluir
    um objeto neste array — nenhum outro arquivo precisa mudar.
 
    Campos:
      name     : nome completo
-     role     : titulo/profissao
-     sub      : subespecialidade (null se nao houver)
-     reg      : numero de registro (CRM, CREFITO, etc.)
+     role     : título/profissão
+     sub      : subespecialidade (null se não houver)
+     reg      : número de registro (CRM, CREFITO, etc.)
      category : 'ortopedistas' | 'fisioterapeutas' | 'outros'
-     group    : grupo dentro da aba (so ortopedistas; null para os demais)
-     photo    : nome do arquivo dentro de assets/img/ (null se nao houver)
+     group    : grupo dentro da aba (só ortopedistas; null para os demais)
+     photo    : nome do arquivo dentro de assets/img/ (null se não houver)
    ============================================================ */
 'use strict';
 
 /* ---------- Categorias de abas ----------
-   A ordem aqui e a ordem de exibicao no site.
+   A ordem aqui é a ordem de exibição no site.
    grouped:true agrupa os cards por subespecialidade. */
 CLIFOR.teamCategories = [
   { key: 'ortopedistas',    label: 'Ortopedistas',          grouped: true  },
@@ -31,113 +31,113 @@ CLIFOR.doctors = [
   /* ========== ORTOPEDISTAS — Coluna ========== */
   {
     name: 'Lucas Sales',
-    role: 'M\u00e9dico Ortopedista', sub: 'Coluna', reg: 'CRM 23337',
+    role: 'Médico Ortopedista', sub: 'Coluna', reg: 'CRM 23337',
     category: 'ortopedistas', group: 'Coluna',
     photo: 'foto-lucas-sales.png',
   },
   {
-    name: 'Ant\u00f4nio Reinaldo',
-    role: 'M\u00e9dico Ortopedista', sub: 'Coluna', reg: 'CRM 22150',
+    name: 'Antônio Reinaldo',
+    role: 'Médico Ortopedista', sub: 'Coluna', reg: 'CRM 22150',
     category: 'ortopedistas', group: 'Coluna',
     photo: 'foto-antonio-reinaldo.png',
   },
   {
-    name: 'M\u00e1rcio Crisanto',
-    role: 'M\u00e9dico Ortopedista', sub: 'Especialista em Coluna', reg: 'CRM 12253',
+    name: 'Márcio Crisanto',
+    role: 'Médico Ortopedista', sub: 'Especialista em Coluna', reg: 'CRM 12253',
     category: 'ortopedistas', group: 'Coluna',
     photo: 'foto-marcio-crisanto.png',
   },
 
   /* ========== ORTOPEDISTAS — Joelho ========== */
   {
-    name: 'F\u00e1bio Guimar\u00e3es',
-    role: 'M\u00e9dico Ortopedista', sub: 'Joelho', reg: 'CRM 11244',
+    name: 'Fábio Guimarães',
+    role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 11244',
     category: 'ortopedistas', group: 'Joelho',
     photo: 'foto-fabio-guimaraes.png',
   },
   {
     name: 'Leonardo Monteiro',
-    role: 'M\u00e9dico Ortopedista', sub: 'Joelho', reg: 'CRM 16119',
+    role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 16119',
     category: 'ortopedistas', group: 'Joelho',
     photo: 'foto-leonardo-monteiro.png',
   },
   {
     name: 'Diego Pires',
-    role: 'M\u00e9dico Ortopedista', sub: 'Joelho', reg: 'CRM 19864',
+    role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 19864',
     category: 'ortopedistas', group: 'Joelho',
     photo: 'foto-diego-pires.png',
   },
   {
     name: 'Augusto Neto',
-    role: 'M\u00e9dico Ortopedista', sub: 'Joelho', reg: 'CRM 10619',
+    role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 10619',
     category: 'ortopedistas', group: 'Joelho',
     photo: null,
   },
   {
     name: 'Mario Alves',
-    role: 'M\u00e9dico Ortopedista', sub: 'Joelho', reg: 'CRM 17178',
+    role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 17178',
     category: 'ortopedistas', group: 'Joelho',
     photo: null,
   },
 
-  /* ========== ORTOPEDISTAS — Pe e Tornozelo ========== */
+  /* ========== ORTOPEDISTAS — Pé e Tornozelo ========== */
   {
     name: 'Fernandes Arteiro',
-    role: 'M\u00e9dico Ortopedista', sub: 'P\u00e9 e Tornozelo', reg: 'CRM 11072',
-    category: 'ortopedistas', group: 'P\u00e9 e Tornozelo',
+    role: 'Médico Ortopedista', sub: 'Pé e Tornozelo', reg: 'CRM 11072',
+    category: 'ortopedistas', group: 'Pé e Tornozelo',
     photo: 'foto-fernandes-arteiro.png',
   },
   {
     name: 'Gabriel Monteiro',
-    role: 'M\u00e9dico Ortopedista', sub: 'P\u00e9 e Tornozelo', reg: 'CRM 18412',
-    category: 'ortopedistas', group: 'P\u00e9 e Tornozelo',
+    role: 'Médico Ortopedista', sub: 'Pé e Tornozelo', reg: 'CRM 18412',
+    category: 'ortopedistas', group: 'Pé e Tornozelo',
     photo: 'foto-gabriel-monteiro.png',
   },
   {
-    name: 'Sandrelli Ara\u00fajo',
-    role: 'M\u00e9dico Ortopedista', sub: 'P\u00e9', reg: 'CRM 11057',
-    category: 'ortopedistas', group: 'P\u00e9 e Tornozelo',
+    name: 'Sandrelli Araújo',
+    role: 'Médico Ortopedista', sub: 'Pé', reg: 'CRM 11057',
+    category: 'ortopedistas', group: 'Pé e Tornozelo',
     photo: 'foto-sandrelli-araujo.png',
   },
   {
     name: 'Marilia Lima',
-    role: 'M\u00e9dica Ortopedista', sub: 'P\u00e9 e Tornozelo', reg: 'CRM 23640',
-    category: 'ortopedistas', group: 'P\u00e9 e Tornozelo',
+    role: 'Médica Ortopedista', sub: 'Pé e Tornozelo', reg: 'CRM 23640',
+    category: 'ortopedistas', group: 'Pé e Tornozelo',
     photo: 'foto-marilia-lima.png',
   },
   {
     name: 'Clarissa Monteiro',
-    role: 'M\u00e9dica Ortopedista', sub: 'Cirurgia do P\u00e9 e Tornozelo', reg: 'CRM 36585',
-    category: 'ortopedistas', group: 'P\u00e9 e Tornozelo',
+    role: 'Médica Ortopedista', sub: 'Cirurgia do Pé e Tornozelo', reg: 'CRM 36585',
+    category: 'ortopedistas', group: 'Pé e Tornozelo',
     photo: 'foto-clarissa-monteiro.png',
   },
 
   /* ========== ORTOPEDISTAS — Quadril ========== */
   {
     name: 'Alessandro Nunes',
-    role: 'M\u00e9dico Ortopedista', sub: 'Quadril', reg: 'CRM 17435',
+    role: 'Médico Ortopedista', sub: 'Quadril', reg: 'CRM 17435',
     category: 'ortopedistas', group: 'Quadril',
     photo: 'foto-alessandro-nunes.png',
   },
 
-  /* ========== ORTOPEDISTAS — Mao ========== */
+  /* ========== ORTOPEDISTAS — Mão ========== */
   {
-    name: 'Andr\u00e9 Pires',
-    role: 'M\u00e9dico Ortopedista', sub: 'M\u00e3o', reg: 'CRM 22725',
-    category: 'ortopedistas', group: 'M\u00e3o',
+    name: 'André Pires',
+    role: 'Médico Ortopedista', sub: 'Mão', reg: 'CRM 22725',
+    category: 'ortopedistas', group: 'Mão',
     photo: 'foto-andre-pires.png',
   },
 
   /* ========== ORTOPEDISTAS — Ombro e Cotovelo ========== */
   {
-    name: 'F\u00e1bio Neumann',
-    role: 'M\u00e9dico Ortopedista', sub: 'Ombro e Cotovelo', reg: 'CRM 14368',
+    name: 'Fábio Neumann',
+    role: 'Médico Ortopedista', sub: 'Ombro e Cotovelo', reg: 'CRM 14368',
     category: 'ortopedistas', group: 'Ombro e Cotovelo',
     photo: 'foto-fabio-neumann.png',
   },
   {
     name: 'Ricardo Barreto',
-    role: 'M\u00e9dico Ortopedista', sub: 'Ombro e Cotovelo', reg: 'CRM 16306',
+    role: 'Médico Ortopedista', sub: 'Ombro e Cotovelo', reg: 'CRM 16306',
     category: 'ortopedistas', group: 'Ombro e Cotovelo',
     photo: null,
   },
@@ -145,7 +145,7 @@ CLIFOR.doctors = [
   /* ========== ORTOPEDISTAS — Acupuntura ========== */
   {
     name: 'Luiz Eduardo',
-    role: 'M\u00e9dico Ortopedista', sub: 'Acupuntura', reg: 'CRM 22434',
+    role: 'Médico Ortopedista', sub: 'Acupuntura', reg: 'CRM 22434',
     category: 'ortopedistas', group: 'Acupuntura',
     photo: null,
   },
@@ -173,7 +173,7 @@ CLIFOR.doctors = [
   /* ========== OUTRAS ESPECIALIDADES ========== */
   {
     name: 'Adjane Leite',
-    role: 'Psic\u00f3loga', sub: null, reg: 'CRP 218702',
+    role: 'Psicóloga', sub: null, reg: 'CRP 218702',
     category: 'outros', group: null,
     photo: 'foto-adjane-leite.png',
   },
@@ -190,7 +190,7 @@ CLIFOR.doctors = [
     photo: null,
   },
   {
-    name: 'M\u00e1rcio Henrick',
+    name: 'Márcio Henrick',
     role: 'Radiologista', sub: null, reg: 'CRTR/PE 01563',
     category: 'outros', group: null,
     photo: 'foto-marcio-henrick.png',

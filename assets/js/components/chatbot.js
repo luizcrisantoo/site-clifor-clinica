@@ -1,20 +1,20 @@
 /* ============================================================
    CLIFOR Olinda — js/components/chatbot.js
-   Logica PURA de resolucao de resposta do chatbot.
-   Nao acessa o DOM — apenas recebe texto e retorna um objeto.
+   Lógica PURA de resolução de resposta do chatbot.
+   Não acessa o DOM — apenas recebe texto e retorna um objeto.
 
    DEPENDE DE: chatbot-flows.js (CLIFOR.chatbotFlows, CLIFOR.chatbotFallback)
 
    Retorno de CLIFOR.resolveResponse():
      {
        text:    string,  // texto a exibir na bolha
-       hasLink: boolean  // true = exibir botao "Falar no WhatsApp"
+       hasLink: boolean  // true = exibir botão "Falar no WhatsApp"
      }
    ============================================================ */
 'use strict';
 
 /**
- * Remove acentos e converte para minusculas para comparacao normalizada.
+ * Remove acentos e converte para minúsculas para comparação normalizada.
  * @param {string} str
  * @returns {string}
  */
@@ -26,7 +26,7 @@ CLIFOR.normalizeText = function normalizeText(str) {
 };
 
 /**
- * Resolve a resposta do chatbot a partir do texto digitado pelo usuario.
+ * Resolve a resposta do chatbot a partir do texto digitado pelo usuário.
  * @param {string} userInput - texto livre digitado pelo paciente
  * @returns {{ text: string, hasLink: boolean }}
  */
@@ -48,7 +48,7 @@ CLIFOR.resolveResponse = function resolveResponse(userInput) {
     return { text: text, hasLink: false };
   }
 
-  /* Nenhum fluxo correspondeu -> fallback com link para WhatsApp */
+  /* Nenhum fluxo correspondeu → fallback com link para WhatsApp */
   return {
     text:    CLIFOR.chatbotFallback.text,
     hasLink: CLIFOR.chatbotFallback.hasLink,
