@@ -1,56 +1,56 @@
 /* ============================================================
-   CLIFOR Olinda — js/lib/chatbot.js
-   Lógica PURA de resolução de resposta do chatbot.
-   Não acessa o DOM — apenas recebe texto e retorna um objeto.
+   CLIFOR Olinda — js/components/chatbot.js
+   Logica PURA de resolucao de resposta do chatbot.
+   Nao acessa o DOM — apenas recebe texto e retorna um objeto.
 
-   DEPENDE DE: chatbot-flows.js (CHATBOT_FLOWS, CHATBOT_FALLBACK)
+   DEPENDE DE: chatbot-flows.js (CLIFOR.chatbotFlows, CLIFOR.chatbotFallback)
 
-   Retorno de resolveResponse():
+   Retorno de CLIFOR.resolveResponse():
      {
        text:    string,  // texto a exibir na bolha
-       hasLink: boolean  // true = exibir botão "Falar no WhatsApp"
+       hasLink: boolean  // true = exibir botao "Falar no WhatsApp"
      }
    ============================================================ */
+'use strict';
 
 /**
- * Remove acentos e converte para minúsculas para comparação normalizada.
+ * Remove acentos e converte para minusculas para comparacao normalizada.
  * @param {string} str
  * @returns {string}
  */
-function normalizeText(str) {
+CLIFOR.normalizeText = function normalizeText(str) {
   return str
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '');
-}
+};
 
 /**
- * Resolve a resposta do chatbot a partir do texto digitado pelo usuário.
+ * Resolve a resposta do chatbot a partir do texto digitado pelo usuario.
  * @param {string} userInput - texto livre digitado pelo paciente
  * @returns {{ text: string, hasLink: boolean }}
  */
-function resolveResponse(userInput) {
-  var input = normalizeText(userInput);
+CLIFOR.resolveResponse = function resolveResponse(userInput) {
+  const normalize = CLIFOR.normalizeText;
+  const input = normalize(userInput);
 
-  for (var i = 0; i < CHATBOT_FLOWS.length; i++) {
-    var flow = CHATBOT_FLOWS[i];
-
-    var matched = flow.keywords.some(function (kw) {
-      return input.includes(normalizeText(kw));
+  const matched = CLIFOR.chatbotFlows.find(function (flow) {
+    return flow.keywords.some(function (kw) {
+      return input.includes(normalize(kw));
     });
+  });
 
-    if (matched) {
-      var text = (typeof flow.response === 'function')
-        ? flow.response()
-        : flow.response;
+  if (matched) {
+    const text = (typeof matched.response === 'function')
+      ? matched.response()
+      : matched.response;
 
-      return { text: text, hasLink: false };
-    }
+    return { text: text, hasLink: false };
   }
 
-  /* Nenhum fluxo correspondeu → fallback com link para WhatsApp */
+  /* Nenhum fluxo correspondeu -> fallback com link para WhatsApp */
   return {
-    text:    CHATBOT_FALLBACK.text,
-    hasLink: CHATBOT_FALLBACK.hasLink,
+    text:    CLIFOR.chatbotFallback.text,
+    hasLink: CLIFOR.chatbotFallback.hasLink,
   };
-}
+};

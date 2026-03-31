@@ -1,10 +1,12 @@
 /**
- * config.js — configurações globais do site CLIFOR Olinda
- * Altere aqui caso o domínio ou ambiente mude.
+ * config.js — Inicializa o namespace global CLIFOR.
+ * Este arquivo DEVE ser carregado antes de todos os outros JS.
+ *
+ * Todos os módulos registram seus dados em window.CLIFOR,
+ * evitando poluição do escopo global com variáveis soltas.
  */
+'use strict';
 
-const CONFIG = {
-  siteUrl:  'https://cliforolinda.com.br',
-  siteName: 'CLIFOR Olinda',
-  version:  '1.0.0',
-};
+window.CLIFOR = window.CLIFOR || {};
+
+CLIFOR.version = '1.0.0';

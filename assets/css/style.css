@@ -189,6 +189,14 @@ footer a:hover { color: #fff; }
   50%      { box-shadow: 0 4px 24px rgba(37,211,102,.55); }
 }
 
+/* === PAGINA DE CONTEUDO (privacidade, termos, etc.) === */
+.content-page { padding: 80px 24px; max-width: 800px; margin: 0 auto; color: var(--gray-600); line-height: 1.8; }
+.content-page h1 { font-size: 1.8rem; font-weight: 800; color: var(--gray-800); margin-bottom: 24px; }
+.content-page h2 { font-size: 1.2rem; font-weight: 700; color: var(--gray-800); margin-top: 32px; margin-bottom: 8px; }
+.content-page p { margin-bottom: 12px; }
+.content-page a { color: var(--blue); font-weight: 600; }
+.content-page-back { margin-top: 48px; }
+
 /* === ACESSIBILIDADE === */
 :focus-visible { outline: 3px solid var(--blue); outline-offset: 2px; }
 

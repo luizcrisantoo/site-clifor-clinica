@@ -1,21 +1,22 @@
 /* ============================================================
    CLIFOR Olinda — js/data/agreements.js
-   Lista de convênios aceitos.
+   Lista de convenios aceitos.
    Adicione ou remova itens aqui — o site e o chatbot se atualizam
    automaticamente (ambos leem este array).
    ============================================================ */
+'use strict';
 
-const AGREEMENTS = [
+CLIFOR.agreements = [
   'Assefaz',
-  'Fisco Saúde',
-  'Bradesco Saúde',
+  'Fisco Sa\u00fade',
+  'Bradesco Sa\u00fade',
   'Fachesf',
   'Cassi',
-  'Saúde Caixa',
+  'Sa\u00fade Caixa',
   'CapeSesp',
   'Medservice',
   'Camed',
-  'Postal Saúde',
+  'Postal Sa\u00fade',
   'Compesa',
   'Sulamerica',
   'Geap',

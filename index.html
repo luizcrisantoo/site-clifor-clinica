@@ -4,54 +4,38 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- ======= SEO básico ======= -->
+  <!-- ======= SEO basico ======= -->
   <title>CLIFOR Olinda — Ortopedia, Fisioterapia e Reabilitação</title>
   <meta name="description"
         content="CLIFOR Olinda: clínica de ortopedia e fisioterapia com 25 profissionais, 14 convênios e atendimento de segunda a sábado. Agende pelo WhatsApp.">
-  <!-- Atualize a URL canônica quando o site for publicado -->
-  <!-- <link rel="canonical" href="https://clifor.com.br"> -->
+  <link rel="canonical" href="https://cliforolinda.com.br">
+
+  <!-- ======= Favicon ======= -->
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg">
+
+  <!-- ======= Content Security Policy ======= -->
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self';
+                 script-src 'self';
+                 style-src 'self' https://fonts.googleapis.com 'unsafe-inline';
+                 font-src https://fonts.gstatic.com;
+                 img-src 'self' data:;
+                 frame-src https://www.google.com;
+                 connect-src 'none';
+                 frame-ancestors 'none';">
 
   <!-- ======= Open Graph (compartilhamento no WhatsApp / redes sociais) ======= -->
   <meta property="og:type"        content="website">
   <meta property="og:title"       content="CLIFOR Olinda — Ortopedia e Fisioterapia">
   <meta property="og:description" content="25 profissionais, 14 convênios, atendimento de seg a sáb. Agende pelo WhatsApp.">
-  <meta property="og:image"       content="assets/og-image.jpg">
-  <!-- <meta property="og:url" content="https://clifor.com.br"> -->
+  <meta property="og:image"       content="https://cliforolinda.com.br/assets/og-image.jpg">
+  <meta property="og:url"         content="https://cliforolinda.com.br">
 
-  <!-- ======= Schema.org — MedicalClinic (Google) ======= -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "MedicalClinic",
-    "name": "CLIFOR Olinda",
-    "description": "Clínica de Ortopedia e Fisioterapia em Olinda-PE",
-    "telephone": "+55-81-3429-6165",
-    "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "Praça Doze de Março, 36",
-      "addressLocality": "Olinda",
-      "addressRegion": "PE",
-      "postalCode": "53030-110",
-      "addressCountry": "BR"
-    },
-    "openingHoursSpecification": [
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-        "opens": "07:00", "closes": "22:00"
-      },
-      {
-        "@type": "OpeningHoursSpecification",
-        "dayOfWeek": "Saturday",
-        "opens": "07:00", "closes": "12:00"
-      }
-    ],
-    "sameAs": ["https://instagram.com/clifor.olinda"]
-  }
-  </script>
+  <!-- Schema.org agora e gerado dinamicamente por main.js (injectSchemaOrg) -->
 
   <!-- ======= Fonte ======= -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
         rel="stylesheet">
 
@@ -311,12 +295,11 @@
     </div>
     <div>
       <h4>Horários</h4>
-      <a>Seg — Sex: 07h – 22h</a>
-      <a>Sábado: 07h – 12h</a>
-      <a style="color:#ef5350">Domingo: Fechado</a>
+      <!-- Preenchido por renderFooter() em main.js -->
+      <div id="footer-hours"></div>
     </div>
   </div>
-  <div class="f-bottom">© 2025 CLIFOR Olinda. Todos os direitos reservados.</div>
+  <div class="f-bottom">© 2026 CLIFOR Olinda. Todos os direitos reservados.</div>
 </footer>
 
 <!-- ===================== BOTÃO WHATSAPP FLUTUANTE ===================== -->
@@ -336,7 +319,7 @@
 </button>
 
 <!-- ===================== JANELA DO CHATBOT ===================== -->
-<div class="chat-popup" id="chat-popup" role="dialog" aria-label="Assistente virtual CLIFOR">
+<div class="chat-popup" id="chat-popup" role="dialog" aria-modal="true" aria-label="Assistente virtual CLIFOR">
   <div class="cp-header">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
@@ -366,19 +349,20 @@
 </div>
 
 <!-- ===================== SCRIPTS =====================
-  Ordem de carregamento obrigatória:
-  1. Dados (sem dependências)
-  2. Libs (dependem dos dados)
-  3. main.js (depende de tudo)
+  Ordem de carregamento obrigatoria:
+  1. config.js (namespace CLIFOR)
+  2. Dados (registram-se em CLIFOR)
+  3. Components (dependem dos dados)
+  4. main.js (orquestra tudo)
 ============================================================ -->
-<script src="assets/js/config.js"></script>
-<script src="assets/js/data/clinic.js"></script>
-<script src="assets/js/data/doctors.js"></script>
-<script src="assets/js/data/agreements.js"></script>
-<script src="assets/js/data/chatbot-flows.js"></script>
-<script src="assets/js/components/whatsapp.js"></script>
-<script src="assets/js/components/chatbot.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/config.js" defer></script>
+<script src="assets/js/data/clinic.js" defer></script>
+<script src="assets/js/data/doctors.js" defer></script>
+<script src="assets/js/data/agreements.js" defer></script>
+<script src="assets/js/data/chatbot-flows.js" defer></script>
+<script src="assets/js/components/whatsapp.js" defer></script>
+<script src="assets/js/components/chatbot.js" defer></script>
+<script src="assets/js/main.js" defer></script>
 
 </body>
 </html>
