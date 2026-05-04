@@ -226,7 +226,7 @@ function renderFooter() {
   hoursContainer.innerHTML = CLINIC.hours.map(function (h) {
     const style = h.closed ? ' style="color:#ef5350"' : '';
     return `<span${style}>${escapeHtml(h.day)}: ${escapeHtml(h.time)}</span>`;
-  }).join('');
+  }).join('<br>');
 }
 
 /* ============================================================
