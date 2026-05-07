@@ -93,7 +93,7 @@ function renderDoctorCard(doc) {
 
   /* Foto: sem onerror inline — evento registrado apos renderizacao */
   const photoHtml = doc.photo
-    ? `<img src="assets/img/${escapeHtml(doc.photo)}" alt="${escapeHtml(doc.name)}, ${escapeHtml(doc.role)}" loading="lazy" data-fallback>` +
+    ? `<img src="assets/img/equipe/${escapeHtml(doc.photo)}" alt="${escapeHtml(doc.name)}, ${escapeHtml(doc.role)}" loading="lazy" data-fallback>` +
       `<div class="t-avatar" style="display:none">${escapeHtml(initials)}</div>`
     : `<div class="t-avatar">${escapeHtml(initials)}</div>`;
 
@@ -113,8 +113,10 @@ function renderDoctorCard(doc) {
 }
 
 /**
- * Gera o HTML de um painel de aba, agrupando por subespecialidade
- * quando grouped:true (ortopedistas).
+ * Gera o HTML de um painel de aba.
+ * - grouped:true (ortopedistas): mostra pills de subespecialidade,
+ *   cards so aparecem ao clicar em uma pill.
+ * - grouped:false: mostra cards direto.
  */
 function renderPanel(cat) {
   const docs = DOCTORS.filter(function (d) { return d.category === cat.key; });
@@ -123,7 +125,7 @@ function renderPanel(cat) {
     return `<div class="team-grid">${docs.map(renderDoctorCard).join('')}</div>`;
   }
 
-  /* Para ortopedistas: agrupa por campo "group", mantendo a ordem de insercao */
+  /* Para ortopedistas: extrai grupos unicos mantendo ordem */
   const seen   = new Set();
   const groups = [];
   docs.forEach(function (d) {
@@ -133,15 +135,28 @@ function renderPanel(cat) {
     }
   });
 
-  return groups.map(function (groupName) {
-    const groupDocs = docs.filter(function (d) { return d.group === groupName; });
-    return [
-      '<div class="team-group">',
-      `  <div class="team-group-title">${escapeHtml(groupName)}</div>`,
-      `  <div class="team-grid">${groupDocs.map(renderDoctorCard).join('')}</div>`,
-      '</div>',
-    ].join('\n');
-  }).join('\n');
+  /* Pills de subespecialidade */
+  var pillsHtml = '<div class="sub-tabs">';
+  groups.forEach(function (groupName) {
+    var count = docs.filter(function (d) { return d.group === groupName; }).length;
+    pillsHtml += `<button class="sub-tab" data-sub="${escapeHtml(groupName)}">${escapeHtml(groupName)} <span class="sub-badge">${count}</span></button>`;
+  });
+  pillsHtml += '</div>';
+
+  /* Sub-paineis (um por grupo, todos ocultos inicialmente) */
+  var subPanelsHtml = '<div class="sub-panels">';
+  groups.forEach(function (groupName) {
+    var groupDocs = docs.filter(function (d) { return d.group === groupName; });
+    subPanelsHtml += `<div class="sub-panel" data-sub-panel="${escapeHtml(groupName)}">`;
+    subPanelsHtml += `<div class="team-grid">${groupDocs.map(renderDoctorCard).join('')}</div>`;
+    subPanelsHtml += '</div>';
+  });
+  subPanelsHtml += '</div>';
+
+  /* Mensagem inicial */
+  var hintHtml = '<p class="sub-hint" id="sub-hint">Selecione uma especialidade acima</p>';
+
+  return pillsHtml + hintHtml + subPanelsHtml;
 }
 
 /**
@@ -210,65 +225,19 @@ function renderAgreements() {
   if (!container) return;
 
   container.innerHTML = AGREEMENTS.map(function (a) {
-    return `<span class="plan-tag">${escapeHtml(a)}</span>`;
+    var scaleClass = a.scale ? ' plan-logo-lg' : '';
+    return [
+      '<div class="plan-card">',
+      '  <img class="plan-logo' + scaleClass + '" src="assets/img/convenios/' + escapeHtml(a.logo) + '" alt="' + escapeHtml(a.name) + '" loading="lazy">',
+      '  <span class="plan-name">' + escapeHtml(a.name) + '</span>',
+      '</div>',
+    ].join('');
   }).join('');
 }
 
 /* ============================================================
-   5. RENDERIZACAO — Rodape (horarios a partir de clinic.js)
-   Elimina duplicacao: os horarios sao mantidos apenas em
-   clinic.js e renderizados aqui, igual as demais secoes.
+   5. Schema.org — estatico no <head> do HTML para SEO.
    ============================================================ */
-function renderFooter() {
-  const hoursContainer = document.getElementById('footer-hours');
-  if (!hoursContainer) return;
-
-  hoursContainer.innerHTML = CLINIC.hours.map(function (h) {
-    const style = h.closed ? ' style="color:#ef5350"' : '';
-    return `<span${style}>${escapeHtml(h.day)}: ${escapeHtml(h.time)}</span>`;
-  }).join('<br>');
-}
-
-/* ============================================================
-   5.1 RENDERIZACAO — Schema.org (gerado a partir de clinic.js)
-   Elimina duplicacao: o JSON-LD e montado a partir de CLINIC,
-   evitando dados hardcoded no HTML.
-   ============================================================ */
-function injectSchemaOrg() {
-  const schema = {
-    '@context': 'https://schema.org',
-    '@type': 'MedicalClinic',
-    'name': CLINIC.name,
-    'description': CLINIC.fullName + ' em ' + CLINIC.address.city + '-' + CLINIC.address.state,
-    'telephone': CLINIC.phone.href.replace('tel:', ''),
-    'address': {
-      '@type': 'PostalAddress',
-      'streetAddress': CLINIC.address.street,
-      'addressLocality': CLINIC.address.city,
-      'addressRegion': CLINIC.address.state,
-      'postalCode': CLINIC.address.cep,
-      'addressCountry': 'BR',
-    },
-    'openingHoursSpecification': [
-      {
-        '@type': 'OpeningHoursSpecification',
-        'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
-        'opens': '07:00', 'closes': '22:00',
-      },
-      {
-        '@type': 'OpeningHoursSpecification',
-        'dayOfWeek': 'Saturday',
-        'opens': '07:00', 'closes': '12:00',
-      },
-    ],
-    'sameAs': [CLINIC.instagram.url],
-  };
-
-  const script = document.createElement('script');
-  script.type = 'application/ld+json';
-  script.textContent = JSON.stringify(schema);
-  document.head.appendChild(script);
-}
 
 /* ============================================================
    6. UI DO CHATBOT
@@ -347,6 +316,26 @@ function sendChatMessage() {
 function setupEventDelegation() {
   document.addEventListener('click', function (e) {
 
+    /* -- Card de especialidade → rola para equipe + abre aba -- */
+    var goTabCard = e.target.closest('[data-go-tab]');
+    if (goTabCard) {
+      var tabKey = goTabCard.dataset.goTab;
+      switchTab(tabKey);
+
+      /* Se tem sub-especialidade, clica na pill correspondente */
+      var subKey = goTabCard.dataset.goSub;
+      if (subKey) {
+        var panel = document.getElementById('panel-' + tabKey);
+        if (panel) {
+          var pill = panel.querySelector('[data-sub="' + subKey + '"]');
+          if (pill) pill.click();
+        }
+      }
+
+      document.getElementById('equipe').scrollIntoView({ behavior: 'smooth' });
+      return;
+    }
+
     /* -- Menu mobile -- */
     if (e.target.closest('[data-action="toggle-nav"]')) {
       document.getElementById('header').classList.toggle('nav-open');
@@ -388,6 +377,100 @@ function setupEventDelegation() {
       return;
     }
 
+    /* -- Trocar sub-aba (pill de subespecialidade) -- */
+    const subBtn = e.target.closest('[data-sub]');
+    if (subBtn && subBtn.closest('.sub-tabs')) {
+      const subKey = subBtn.dataset.sub;
+      const panel  = subBtn.closest('.team-panel');
+      if (!panel) return;
+
+      /* Ativa pill clicada */
+      panel.querySelectorAll('.sub-tab').forEach(function (s) {
+        s.classList.toggle('active', s.dataset.sub === subKey);
+      });
+
+      /* Esconde hint */
+      var hint = panel.querySelector('.sub-hint');
+      if (hint) hint.style.display = 'none';
+
+      /* Mostra sub-painel correspondente */
+      panel.querySelectorAll('.sub-panel').forEach(function (sp) {
+        sp.classList.toggle('active', sp.dataset.subPanel === subKey);
+      });
+
+      /* Registra fallback de imagem no sub-painel recem exibido */
+      var activeSubPanel = panel.querySelector('.sub-panel.active');
+      if (activeSubPanel) {
+        activeSubPanel.querySelectorAll('.t-photo img[data-fallback]').forEach(function (img) {
+          if (!img.dataset.fallbackBound) {
+            img.dataset.fallbackBound = '1';
+            img.addEventListener('error', function () {
+              img.style.display = 'none';
+              var avatar = img.nextElementSibling;
+              if (avatar) avatar.style.display = 'flex';
+            });
+          }
+        });
+      }
+      return;
+    }
+
+    /* -- Play/pause video principal (mosaico) -- */
+    if (e.target.closest('[data-action="play-video"]')) {
+      var video = document.getElementById('video-principal');
+      var playBtn = e.target.closest('[data-action="play-video"]');
+      if (video) {
+        video.play();
+        playBtn.classList.add('hidden');
+        video.addEventListener('ended', function () {
+          playBtn.classList.remove('hidden');
+        });
+        video.addEventListener('pause', function () {
+          playBtn.classList.remove('hidden');
+        });
+      }
+      return;
+    }
+
+    /* -- Clicar no video principal para pausar -- */
+    if (e.target.closest('.mosaic-main video')) {
+      var vid = e.target.closest('video');
+      if (!vid.paused) vid.pause();
+      return;
+    }
+
+    /* -- Trocar video ao clicar em thumbnail do mosaico -- */
+    var mosaicVid = e.target.closest('.mosaic-video');
+    if (mosaicVid) {
+      var videoSrc = mosaicVid.dataset.video;
+      var poster   = mosaicVid.dataset.poster;
+      var mainVid  = document.getElementById('video-principal');
+      var mainBtn  = document.querySelector('.mosaic-play');
+      if (mainVid && videoSrc) {
+        mainVid.pause();
+        mainVid.querySelector('source').src = videoSrc;
+        mainVid.poster = poster || '';
+        mainVid.load();
+        if (mainBtn) mainBtn.classList.remove('hidden');
+        document.getElementById('estrutura').scrollIntoView({ behavior: 'smooth' });
+      }
+      return;
+    }
+
+    /* -- "Ver mais" do mosaico -- */
+    if (e.target.closest('[data-action="show-more-estrutura"]')) {
+      var extra = document.getElementById('mosaic-extra');
+      if (extra) {
+        extra.style.display = (extra.style.display === 'none') ? 'block' : 'none';
+        var overlay = e.target.closest('.mosaic-more');
+        if (overlay) {
+          var txt = overlay.querySelector('.mosaic-overlay');
+          if (txt) txt.textContent = (extra.style.display === 'none') ? '+5 fotos' : 'Ver menos';
+        }
+      }
+      return;
+    }
+
   });
 
   /* Enter para enviar no chat */
@@ -413,12 +496,145 @@ function setupEventDelegation() {
 /* ============================================================
    8. INICIALIZACAO
    ============================================================ */
+/** Carrossel de avaliações */
+function setupReviewsCarousel() {
+  var carousel = document.getElementById('reviewsCarousel');
+  if (!carousel) return;
+
+  var track = carousel.querySelector('.reviews-track');
+  var cards = track.querySelectorAll('.review-card');
+  var prevBtn = document.getElementById('revPrev');
+  var nextBtn = document.getElementById('revNext');
+  var dotsContainer = document.getElementById('revDots');
+  var counterEl = document.getElementById('revCounter');
+
+  if (cards.length === 0) return;
+
+  /* Quantos cards visíveis por vez (2 no desktop, 1 no mobile) */
+  function getPerView() {
+    return window.innerWidth <= 600 ? 1 : 2;
+  }
+
+  var currentIndex = 0;
+
+  function getTotalPages() {
+    return Math.ceil(cards.length / getPerView());
+  }
+
+  /* Renderiza dots */
+  function renderDots() {
+    var total = getTotalPages();
+    dotsContainer.innerHTML = '';
+    for (var i = 0; i < total; i++) {
+      var dot = document.createElement('button');
+      dot.className = 'reviews-dot' + (i === currentIndex ? ' active' : '');
+      dot.setAttribute('aria-label', 'Página ' + (i + 1));
+      dot.dataset.page = i;
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  /* Move o track */
+  function goTo(index) {
+    var perView = getPerView();
+    var totalPages = getTotalPages();
+    if (index < 0) index = 0;
+    if (index >= totalPages) index = totalPages - 1;
+    currentIndex = index;
+
+    /* Calcula a largura de um card + gap */
+    var trackGap = parseInt(getComputedStyle(track).gap) || 16;
+    var cardWidth = cards[0].offsetWidth + trackGap;
+    var offset = currentIndex * perView * cardWidth;
+    track.style.transform = 'translateX(-' + offset + 'px)';
+
+    /* Atualiza botões */
+    prevBtn.disabled = currentIndex === 0;
+    nextBtn.disabled = currentIndex >= totalPages - 1;
+
+    /* Atualiza dots */
+    dotsContainer.querySelectorAll('.reviews-dot').forEach(function (d, i) {
+      d.classList.toggle('active', i === currentIndex);
+    });
+
+    /* Atualiza contador */
+    if (counterEl) {
+      counterEl.textContent = (currentIndex + 1) + ' / ' + totalPages;
+    }
+  }
+
+  /* Eventos */
+  prevBtn.addEventListener('click', function () { goTo(currentIndex - 1); });
+  nextBtn.addEventListener('click', function () { goTo(currentIndex + 1); });
+  dotsContainer.addEventListener('click', function (e) {
+    var dot = e.target.closest('.reviews-dot');
+    if (dot) goTo(parseInt(dot.dataset.page));
+  });
+
+  /* Suporte a swipe touch */
+  var startX = 0;
+  var isDragging = false;
+  track.addEventListener('touchstart', function (e) {
+    startX = e.touches[0].clientX;
+    isDragging = true;
+  }, { passive: true });
+  track.addEventListener('touchend', function (e) {
+    if (!isDragging) return;
+    isDragging = false;
+    var diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 50) {
+      goTo(currentIndex + (diff > 0 ? 1 : -1));
+    }
+  }, { passive: true });
+
+  /* Resize */
+  var resizeTimer;
+  window.addEventListener('resize', function () {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(function () {
+      renderDots();
+      goTo(Math.min(currentIndex, getTotalPages() - 1));
+    }, 150);
+  });
+
+  renderDots();
+  goTo(0);
+}
+
+/** Lazy-load do iframe do Google Maps via IntersectionObserver. */
+function setupLazyMap() {
+  var mapFrame = document.getElementById('map-frame');
+  if (!mapFrame) return;
+
+  var iframe = mapFrame.querySelector('iframe[data-src]');
+  if (!iframe) return;
+
+  if ('IntersectionObserver' in window) {
+    var observer = new IntersectionObserver(function (entries) {
+      if (entries[0].isIntersecting) {
+        iframe.src = iframe.dataset.src;
+        iframe.style.display = 'block';
+        var placeholder = document.getElementById('map-placeholder');
+        if (placeholder) placeholder.style.display = 'none';
+        observer.disconnect();
+      }
+    }, { rootMargin: '200px' });
+    observer.observe(mapFrame);
+  } else {
+    /* Fallback para navegadores sem suporte */
+    iframe.src = iframe.dataset.src;
+    iframe.style.display = 'block';
+    var placeholder = document.getElementById('map-placeholder');
+    if (placeholder) placeholder.style.display = 'none';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', function () {
   renderWALinks();
   renderStats();
   renderTeam();
   renderAgreements();
-  renderFooter();
-  injectSchemaOrg();
   setupEventDelegation();
+  setupLazyMap();
+  setupReviewsCarousel();
 });

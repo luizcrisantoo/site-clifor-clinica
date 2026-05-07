@@ -44,7 +44,7 @@ CLIFOR.chatbotFlows = [
     label:    'Convênios',
     keywords: ['plano', 'convênio', 'convenio', 'seguro', 'unimed', 'bradesco', 'aceita', 'particular'],
     response: function () {
-      return 'Aceitamos os seguintes convênios:\n\n' + CLIFOR.agreements.join(' · ') + '\n\nTambém atendemos particular.';
+      return 'Aceitamos os seguintes convênios:\n\n' + CLIFOR.agreements.map(function(a){ return a.name; }).join(' · ') + '\n\nTambém atendemos particular.';
     },
   },
 
