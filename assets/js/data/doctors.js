@@ -34,10 +34,10 @@ CLIFOR.doctors = [
     photo: 'foto-antonio-reinaldo.png',
   },
   {
-    name: 'Lucas Sales',
+    name: 'Lucas Melo',
     role: 'Médico Ortopedista', sub: 'Coluna', reg: 'CRM 23337',
     category: 'ortopedistas', group: 'Coluna',
-    photo: 'foto-lucas-sales.png',
+    photo: 'foto-lucas-melo.png',
   },
   {
     name: 'Márcio Crisanto',
@@ -57,7 +57,7 @@ CLIFOR.doctors = [
     name: 'Thiago Cintra',
     role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 18418',
     category: 'ortopedistas', group: 'Joelho',
-    photo: null,
+    photo: 'foto-thiago-cintra.png',
   },
   {
     name: 'Fábio Guimarães',
@@ -81,7 +81,7 @@ CLIFOR.doctors = [
     name: 'Mario Alves',
     role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 17178',
     category: 'ortopedistas', group: 'Joelho',
-    photo: null,
+    photo: 'foto-mario-alves.png',
   },
 
   /* ========== ORTOPEDISTAS — Ombro e Cotovelo ========== */
@@ -95,7 +95,7 @@ CLIFOR.doctors = [
     name: 'Ricardo Barreto',
     role: 'Médico Ortopedista', sub: 'Ombro e Cotovelo', reg: 'CRM 16306',
     category: 'ortopedistas', group: 'Ombro e Cotovelo',
-    photo: null,
+    photo: 'foto-ricardo-barreto.png',
   },
   {
     name: 'Fábio Neumann',
