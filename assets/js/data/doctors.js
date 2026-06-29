@@ -69,7 +69,7 @@ CLIFOR.doctors = [
     name: 'Bruno Torban',
     role: 'Médico Ortopedista', sub: 'Joelho', reg: 'CRM 26817',
     category: 'ortopedistas', group: 'Joelho',
-    photo: null,
+    photo: 'foto-bruno-torban.png',
   },
   {
     name: 'Leonardo Monteiro',
