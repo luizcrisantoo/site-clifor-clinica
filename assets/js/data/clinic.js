@@ -45,8 +45,9 @@ CLIFOR.clinic = {
 
   /* ---- Horários ---- */
   hours: [
-    { day: 'Seg a Sex', time: '07:00 – 22:00', closed: false },
-    { day: 'Sábado',    time: '07:00 – 12:00', closed: false },
+    { day: 'Seg a Qui', time: '07:00 – 21:00', closed: false },
+    { day: 'Sexta',     time: '07:00 – 20:00', closed: false },
+    { day: 'Sábado',    time: 'Fechado',        closed: true  },
     { day: 'Domingo',   time: 'Fechado',        closed: true  },
   ],
 
