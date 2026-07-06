@@ -16,7 +16,7 @@ CLIFOR.chatbotFlows = [
     id:       'equipe',
     label:    'Nossa equipe',
     keywords: ['médic', 'doutor', 'doctor', 'equipe', 'profissional', 'especialista'],
-    response: 'Nossa equipe conta com 25 profissionais: médicos ortopedistas (coluna, joelho, pé, quadril, mão, ombro e acupuntura), fisioterapeutas, nutricionistas, psicóloga e radiologista. Veja a aba "Equipe" para conhecer cada um.',
+    response: 'Nossa equipe conta com 24 profissionais: médicos ortopedistas (coluna, joelho, pé, quadril, mão, ombro e acupuntura), fisioterapeutas, nutricionistas, psicóloga e radiologista. Veja a aba "Equipe" para conhecer cada um.',
   },
 
   {

@@ -60,7 +60,7 @@ CLIFOR.clinic = {
   /* ---- Estatísticas exibidas no Hero ---- */
   stats: [
     { value: '7+', label: 'Especialidades' },
-    { value: '25', label: 'Profissionais'  },
+    { value: '24', label: 'Profissionais'  },
     { value: '14', label: 'Convênios'      },
   ],
 
