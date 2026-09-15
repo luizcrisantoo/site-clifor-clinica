@@ -83,7 +83,7 @@ CLIFOR.doctors = [
     name: 'Felipe Fragoso',
     role: 'Médico Ortopedista', sub: 'Ombro', reg: 'CRM 26180',
     category: 'ortopedistas', group: 'Ombro e Cotovelo',
-    photo: null,
+    photo: 'foto-felipe-fragoso.jpg',
   },
   {
     name: 'Ricardo Barreto',
